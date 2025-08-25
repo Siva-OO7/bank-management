@@ -31,7 +31,7 @@ export default function UserDetails() {
     (async () => {
       if (!accountNumber) { setLoading(false); return; }
       try {
-        const r = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/by-account/${accountNumber}`);
+        const r = await fetch(`${process.env.REACT_APP_API_URL}/users/by-account/${accountNumber}`);
         const data = await r.json();
         if (!alive) return;
         if (data.status === "success") {
@@ -66,7 +66,7 @@ export default function UserDetails() {
   const save = async () => {
     setMsg("");
     try {
-      const r = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/by-account/${accountNumber}`, {
+      const r = await fetch(`${process.env.REACT_APP_API_URL}/users/by-account/${accountNumber}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -104,7 +104,7 @@ export default function UserDetails() {
 
     setMsg("");
     try {
-      const r = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/by-account/${accountNumber}/password`, {
+      const r = await fetch(`${process.env.REACT_APP_API_URL}/users/by-account/${accountNumber}/password`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ old_password, new_password }),
@@ -129,7 +129,7 @@ export default function UserDetails() {
     if (!window.confirm("Delete account permanently? This cannot be undone.")) return;
 
     try {
-      const r = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/by-account/${accountNumber}`, {
+      const r = await fetch(`${process.env.REACT_APP_API_URL}/users/by-account/${accountNumber}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ current_password }),
