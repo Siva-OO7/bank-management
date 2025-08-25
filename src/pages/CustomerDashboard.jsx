@@ -167,7 +167,7 @@ export default function CustomerDashboard() {
   // API
   const fetchAccount = async () => {
     try {
-      const res = await fetch(`http://127.0.0.1:8000/accounts/${user.user_id}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/accounts/${user.user_id}`);
       const data = await res.json();
       if (data.status === "success") {
         setAccount(data.account);
@@ -178,7 +178,7 @@ export default function CustomerDashboard() {
 
   const fetchHistory = async () => {
     try {
-      const res = await fetch(`http://127.0.0.1:8000/transactions/history/${user.user_id}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transactions/history/${user.user_id}`);
       const data = await res.json();
       if (data.status === "success") setTransactions(data.transactions || []);
     } catch {}
@@ -203,8 +203,8 @@ export default function CustomerDashboard() {
 
     const endpoint =
       modal.type === "deposit"
-        ? "http://127.0.0.1:8000/transactions/deposit"
-        : "http://127.0.0.1:8000/transactions/withdraw";
+        ? `${process.env.NEXT_PUBLIC_API_URL}/transactions/deposit`
+        : `${process.env.NEXT_PUBLIC_API_URL}/transactions/withdraw`;
 
     try {
       const res = await fetch(endpoint, {
@@ -238,7 +238,7 @@ export default function CustomerDashboard() {
 
     const amount = Number(transferAmt) || 300;
     try {
-      const res = await fetch("http://127.0.0.1:8000/transactions/transfer", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transactions/transfer`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -343,7 +343,7 @@ export default function CustomerDashboard() {
     reader.onloadend = async () => {
       const base64 = (reader.result || "").toString().split(",")[1];
       try {
-        const res = await fetch("http://127.0.0.1:8000/transactions/send-report", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transactions/send-report`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
