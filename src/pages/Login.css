@@ -1,0 +1,290 @@
+/* ===== Centered split card (matches Register look) ===== */
+.login-wrap {
+  /* make the whole thing a single rounded card */
+  width: min(1080px, 94vw);
+  margin: 64px auto;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;   /* near 50/50 */
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.10);
+}
+
+/* Left hero (image is passed inline from Login.jsx) */
+.login-hero {
+  position: relative;
+  min-height: 560px;              /* keeps both halves same height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* image comes from JSX:  style={{ backgroundImage: `url(${heroImg})` }} */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Feature bullets overlay (bottom-left) */
+.hero-points.only {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(2px);
+  color: #fff;
+  font-weight: 600;
+  display: grid;
+  gap: 6px;
+}
+
+/* Right side (form half) — merged, single definition */
+.login-card {
+  background: linear-gradient(180deg, #000000 100%);
+  display: flex;
+  flex-direction: column;   /* stack form + footer */
+  justify-content: center;
+  align-items: center;
+  padding: clamp(24px, 4vw, 56px);
+  max-width: 1000px;    /* 👈 makes entire card wider */
+  width: 100%;
+}
+
+.card-inner {
+  background: #262008;
+  border-radius: 18px;
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+  padding: clamp(32px, 5vw, 56px);
+  max-width: 640px;   /* 👈 increased from 540px */
+  width: 100%;
+  margin: 0 auto 10px;
+}
+
+/* Headings / text */
+h2 { margin: 0 0 8px; font-size: 28px; color: #0f172a; }
+.muted { color: #64748b; }
+.small { font-size: 13px; }
+.tiny  { font-size: 12px; }
+.center { text-align: center; }
+
+/* Form */
+.form { display: grid; gap: 14px; margin: 16px 0 10px; }
+label { color: #334155; font-size: 14px; display: grid; gap: 6px; }
+
+/* Inputs */
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  outline: none;
+  font-size: 15px;
+  background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59,130,246,0.15);
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+.checkbox { display: inline-flex; align-items: center; gap: 8px; color: #475569; }
+
+.link { color: #2563eb; text-decoration: none; }
+.link:hover { text-decoration: underline; }
+
+/* Primary button — kept for general form */
+.btn-primary {
+  width: 100%;
+  padding: 12px 14px;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #f97316, #fb7f24); /* warm CTA like register */
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: filter 0.2s, transform 0.02s;
+}
+.btn-primary:hover { filter: brightness(1.03); }
+.btn-primary:active { transform: translateY(1px); }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Alerts */
+.alert { margin-top: 10px; border-radius: 10px; padding: 10px 12px; font-size: 14px; }
+.alert-success { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+.alert-error   { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+
+/* ===== Responsive ===== */
+@media (max-width: 960px) {
+  .login-wrap { grid-template-columns: 1fr; margin: 24px auto; }
+  .login-hero { min-height: 220px; }
+  .login-card { padding: 24px; }
+  .card-inner { width: 100%; }
+  .hero-points.only { left: 14px; bottom: 14px; padding: 8px 10px; }
+}
+
+/* =========================================================
+   Gold Themed Modal (scoped so it doesn't affect the page)
+   ========================================================= */
+
+/* Link-styled button used inside modal */
+.link-button {
+  background: none;
+  border: none;
+  color: #FFD700; /* gold */
+  padding: 0;
+  cursor: pointer;
+  font-weight: 600;
+}
+.link-button:hover { text-decoration: underline; }
+
+/* Single, final modal overlay (no duplicates) */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65); /* darker backdrop for contrast */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* on top */
+}
+
+/* Gold frame modal */
+.modal-box {
+  width: 360px;
+  max-width: calc(100% - 32px);
+  background: #111; /* dark canvas so gold pops */
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  padding: 22px 20px 18px;
+  text-align: center;
+  border: 2px solid #FFD700; /* gold border */
+}
+
+/* All text inside modal in gold */
+.modal-box h3,
+.modal-box p,
+.modal-box label,
+.modal-box .muted,
+.modal-box .small,
+.modal-box .tiny {
+  color: #FFD700; /* gold text */
+}
+
+/* Inputs inside modal: gold text + borders */
+.modal-box input,
+.modal-box select,
+.modal-box textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #FFD700;
+  background: #0b0b0b;
+  color: #FFD700;
+  outline: none;
+  font-size: 14px;
+}
+.modal-box input::placeholder,
+.modal-box textarea::placeholder {
+  color: #FFD700;
+  opacity: 0.8;
+}
+.modal-box input:focus,
+.modal-box select:focus,
+.modal-box textarea:focus {
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.25);
+  border-color: #FFD700;
+}
+
+/* Buttons inside modal — scoped so main form stays unchanged */
+.modal-box .btn-primary {
+  width: 100%;
+  padding: 12px 14px;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #FFD700, #FFC300); /* gold gradient */
+  color: #111;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: filter 0.2s, transform 0.02s;
+}
+.modal-box .btn-primary:hover { filter: brightness(1.08); }
+.modal-box .btn-primary:active { transform: translateY(1px); }
+.modal-box .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.modal-box .btn-secondary {
+  padding: 10px 12px;
+  border: 1px solid #FFD700;
+  background: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #FFD700;
+}
+.modal-box .btn-secondary:hover { background: rgba(255, 215, 0, 0.1); }
+/* ===== GOLD THEME LOGIN PAGE ===== */
+
+/* Headings / text */
+h2,
+.login-card h2,
+.login-card label,
+.login-card .muted,
+.login-card .small,
+.login-card .tiny {
+  color: #d8bc64; /* gold text */
+}
+
+/* Inputs */
+.login-card input[type="email"],
+.login-card input[type="password"],
+.login-card input[type="text"] {
+  border: 1px solid #FFD700;
+  background: #0b0b0b;   /* dark bg for contrast */
+  color: #FFD700;
+}
+.login-card input:focus {
+  border-color: #FFD700;
+  box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.25);
+}
+.login-card input::placeholder {
+  color: #FFD700;
+  opacity: 0.7;
+}
+
+/* Links */
+.login-card .link,
+.login-card .link-button {
+  color: #FFD700;
+}
+.login-card .link:hover,
+.login-card .link-button:hover {
+  text-decoration: underline;
+}
+
+/* Primary button */
+.login-card .btn-primary {
+  background: linear-gradient(90deg, #FFD700, #FFC300); /* gold gradient */
+  color: #111;
+}
+.login-card .btn-primary:hover { filter: brightness(1.08); }
+
+/* Secondary button */
+.login-card .btn-secondary {
+  border: 1px solid #FFD700;
+  color: #FFD700;
+  background: transparent;
+}
+.login-card .btn-secondary:hover {
+  background: rgba(255, 215, 0, 0.1);
+}

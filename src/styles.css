@@ -1,0 +1,32 @@
+:root { --pad: 12px; --gap: 12px; }
+body { font-family: system-ui, Arial, sans-serif; margin: 0; background: #f6f7fb; color: #111; }
+.container { max-width: 1000px; margin: 0 auto; padding: 24px; }
+.card { background: #fff; border-radius: 12px; padding: var(--pad); box-shadow: 0 6px 18px rgba(0,0,0,.08); margin-bottom: var(--gap); }
+h1,h2 { margin: 8px 0 16px; }
+input,select,button,textarea { padding: 10px 12px; border: 1px solid #ddd; border-radius: 8px; }
+input,select,textarea { width: 100%; }
+button { background: #111; color: #fff; cursor: pointer; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); }
+nav a { margin-right: 12px; }
+.badge { background:#eef; padding:4px 8px; border-radius: 8px; }
+.grid3 { display:grid; grid-template-columns: repeat(3,1fr); gap: var(--gap); }
+.small { font-size: .9rem; color:#555; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: url("./components/v915-wit-001-l.jpg") no-repeat center center fixed;
+  background-size: cover;
+  font-family: sans-serif;
+
+}
+
+.container {
+  max-width: 1000px;
+  width: 100%;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* center cards inside */
+}
+
+  
